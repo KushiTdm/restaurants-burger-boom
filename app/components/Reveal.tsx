@@ -73,7 +73,6 @@ export default function Reveal({
   }, [delay, y, stagger, staggerSelector])
 
   return (
-    // @ts-expect-error dynamic tag
     <Tag ref={ref} className={className}>
       {children}
     </Tag>
