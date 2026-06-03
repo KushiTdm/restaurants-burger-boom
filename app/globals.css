@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --rouge: #E63946;
+  --jaune: #FFB703;
+  --sombre: #1d1d1d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: clip;
+}
+
+body {
+  background-color: #fff;
+  color: var(--sombre);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+
+.btn-rouge {
+  @apply inline-block px-6 sm:px-8 py-3 sm:py-4 bg-rouge text-white font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-rouge/30 rounded-md text-sm sm:text-base;
+}
+
+.btn-jaune {
+  @apply inline-block px-6 sm:px-8 py-3 sm:py-4 bg-jaune text-sombre font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-jaune/40 rounded-md text-sm sm:text-base;
+}
+
+.burger-card {
+  @apply bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:-translate-y-1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide scrollbar for menu category nav */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
