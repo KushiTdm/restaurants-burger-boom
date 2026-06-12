@@ -88,8 +88,20 @@ export default function RootLayout({
               </ul>
             </div>
           </div>
-          <div className="max-w-6xl mx-auto px-5 sm:px-6 mt-10 pt-6 border-t border-white/10 text-center text-gray-500 text-xs sm:text-sm">
-            © 2026 BurgerBoom — Tous droits réservés 🔥
+          <div className="max-w-6xl mx-auto px-5 sm:px-6 mt-10 pt-6 border-t border-white/10 text-center text-gray-500 text-xs sm:text-sm space-y-2">
+            <p>© 2026 BurgerBoom — Tous droits réservés 🔥</p>
+            <p className="text-gray-600">
+              Conçu &amp; développé par{' '}
+              <a
+                href="https://neuraweb.tech"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-jaune hover:underline"
+              >
+                NeuraWeb
+              </a>
+              {' '}— agence web, automatisation &amp; intégration IA
+            </p>
           </div>
         </footer>
       </body>
