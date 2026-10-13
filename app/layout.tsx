@@ -1,11 +1,21 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Header from './components/Header'
+import Logo from './components/Logo'
 
 export const metadata: Metadata = {
-  title: 'BurgerBoom 🍔 — Les Meilleurs Burgers Artisanaux',
+  title: 'BurgerBoom — Burgers artisanaux à Paris & Lyon | Commande en ligne',
   description:
-    'Burgers artisanaux, généreux et savoureux. Commandez en ligne ou venez nous rendre visite à Paris ou Lyon.',
+    'BurgerBoom, burgers artisanaux généreux à Paris et Lyon : viandes sélectionnées, pains frais, frites maison. Commandez en ligne, à emporter ou en livraison.',
+}
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: 'BurgerBoom',
+  servesCuisine: 'Burgers',
+  priceRange: '€€',
+  areaServed: ['Paris', 'Lyon'],
 }
 
 export default function RootLayout({
@@ -16,15 +26,13 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="bg-white">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
         <Header />
         <main>{children}</main>
         <footer className="bg-sombre text-white pt-12 pb-8 mt-12 sm:mt-16">
           <div className="max-w-6xl mx-auto px-5 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-3xl">🍔</span>
-                <span className="font-bebas text-jaune text-3xl">BurgerBoom</span>
-              </div>
+              <div className="mb-4"><Logo /></div>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Des burgers faits avec amour, des ingrédients frais du marché, des saveurs qui explosent en bouche.
               </p>
@@ -91,16 +99,15 @@ export default function RootLayout({
           <div className="max-w-6xl mx-auto px-5 sm:px-6 mt-10 pt-6 border-t border-white/10 text-center text-gray-500 text-xs sm:text-sm space-y-2">
             <p>© 2026 BurgerBoom — Tous droits réservés 🔥</p>
             <p className="text-gray-600">
-              Conçu &amp; développé par{' '}
+              Site créé par{' '}
               <a
-                href="https://neuraweb.tech"
+                href="https://neuraweb.fr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold text-jaune hover:underline"
               >
-                NeuraWeb
+                NeuraWeb.fr
               </a>
-              {' '}— agence web, automatisation &amp; intégration IA
             </p>
           </div>
         </footer>

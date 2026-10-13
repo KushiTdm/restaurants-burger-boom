@@ -1,22 +1,24 @@
 const u = (id: string, w = 800) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`
 
-export const heroBurger = u('photo-1568901346375-23c9450c58cd', 1200)
-export const heroBackdrop = u('photo-1571091718767-18b5b1457add', 1600)
+const local = (name: string) => `/images/${name}.jpg`
+
+export const heroBurger = local('burger_boomboom_classic')
+export const heroBackdrop = local('backdrop_restaurant_interior')
 
 export const burgerImages: Record<string, string> = {
-  'Le BoomBoom Classic': u('photo-1568901346375-23c9450c58cd'),
-  'Le Volcanique': u('photo-1550317138-10000687a72b'),
-  'Le Champignon Forestier': u('photo-1606131731446-5568d87113aa'),
-  'Le BBQ Fumé': u('photo-1551782450-a2132b4ba21d'),
-  'Le Croque Monsieur Burger': u('photo-1550317138-10000687a72b'),
-  'Le Double Cheese': u('photo-1572802419224-296b0aeee0d9'),
-  'Le Végétarien Boom': u('photo-1525059696034-4967a8e1dca2'),
-  'Le Poulet Croustillant': u('photo-1606755962773-d324e0a13086'),
+  'Le BoomBoom Classic': local('burger_boomboom_classic'),
+  'Le Volcanique': local('burger_volcanique'),
+  'Le Champignon Forestier': local('burger_champignon'),
+  'Le BBQ Fumé': local('burger_bbq'),
+  'Le Croque Monsieur Burger': local('burger_croque_monsieur'),
+  'Le Double Cheese': local('burger_double_cheese'),
+  'Le Végétarien Boom': local('burger_vegetarien'),
+  'Le Poulet Croustillant': local('burger_poulet_croustillant'),
 
   'Frites Maison': u('photo-1573080496219-bb080dd4f877'),
-  'Frites au Fromage': u('photo-1639024471283-03518883512d'),
-  'Onion Rings': u('photo-1639024471283-03518883512d'),
+  'Frites au Fromage': local('side_frites_fromage'),
+  'Onion Rings': local('side_onion_rings'),
   'Coleslaw Maison': u('photo-1625938145744-533adea71c3a'),
   'Nuggets × 6': u('photo-1562967914-608f82629710'),
   "Mac'n'Cheese": u('photo-1543352634-99a5d50ae78e'),
@@ -24,7 +26,7 @@ export const burgerImages: Record<string, string> = {
   'Coca-Cola 33cl': u('photo-1581636625402-29b2a704ef13'),
   'Limonade Maison': u('photo-1556679343-c7306c1976bc'),
   'Milk-Shake Vanille': u('photo-1572490122747-3968b75cc699'),
-  'Milk-Shake Chocolat': u('photo-1572490122747-3968b75cc699'),
+  'Milk-Shake Chocolat': local('drink_milkshake_chocolat'),
   "Jus d'Orange Pressé": u('photo-1613478223719-2ab802602423'),
   'Eau Minérale 50cl': u('photo-1559839734-2b71ea197ec2'),
   'Bière Pression 25cl': u('photo-1608270586620-248524c67de9'),
@@ -36,10 +38,10 @@ export const burgerImages: Record<string, string> = {
 }
 
 export const getImage = (name: string, fallback?: string) =>
-  burgerImages[name] || fallback || u('photo-1568901346375-23c9450c58cd')
+  burgerImages[name] || fallback || heroBurger
 
 export const sectionBackdrops = {
   promos: u('photo-1550547660-d9450f859349', 1600),
   locations: u('photo-1517248135467-4c7edcad34c4', 1600),
-  app: u('photo-1571091718767-18b5b1457add', 1600),
+  app: local('backdrop_restaurant_interior'),
 }

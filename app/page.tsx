@@ -37,14 +37,14 @@ const locations = [
     adresse: '12 Rue de Rivoli, 75004',
     metro: 'Hôtel de Ville (L1, L11)',
     tel: '+33 1 42 XX XX XX',
-    image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80',
+    image: '/images/location_paris.jpg',
   },
   {
     ville: 'Lyon',
     adresse: '45 Cours Lafayette, 69003',
     metro: 'Part-Dieu (Tram T1, T2)',
     tel: '+33 4 78 XX XX XX',
-    image: 'https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?auto=format&fit=crop&w=900&q=80',
+    image: '/images/location_lyon.jpg',
   },
 ]
 

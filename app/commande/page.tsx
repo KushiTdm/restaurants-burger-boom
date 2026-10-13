@@ -93,7 +93,7 @@ export default function CommandePage() {
       <section className="relative bg-sombre py-10 sm:py-12 text-center overflow-hidden">
         <div className="absolute inset-0 opacity-15">
           <Image
-            src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=1600&q=80"
+            src="/images/backdrop_restaurant_interior.jpg"
             alt=""
             fill
             sizes="100vw"

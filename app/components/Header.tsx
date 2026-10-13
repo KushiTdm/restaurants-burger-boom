@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import Logo from './Logo'
 
 const links = [
   { href: '/', label: 'Accueil' },
@@ -39,11 +40,7 @@ export default function Header() {
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 group">
-            <span className="text-3xl sm:text-4xl group-hover:rotate-12 transition-transform duration-300">🍔</span>
-            <div>
-              <span className="font-bebas text-jaune text-2xl sm:text-3xl tracking-wider block leading-none">BurgerBoom</span>
-              <p className="hidden sm:block text-[10px] text-gray-400 font-oswald tracking-widest uppercase">Artisanal · Généreux · Savoureux</p>
-            </div>
+            <span className="group-hover:scale-105 transition-transform duration-300"><Logo tagline /></span>
           </a>
 
           <nav className="hidden md:flex items-center gap-6">
