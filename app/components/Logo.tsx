@@ -5,31 +5,34 @@ interface LogoProps {
   tagline?: boolean
 }
 
-// Logo BurgerBoom : burger stylisé dans une explosion + wordmark Bebas Neue.
+// Logo BurgerBoom : burger "melt" (pain, sauce qui coule, pain) + wordmark Archivo extra-large.
 export default function Logo({ className = '', tagline = false }: LogoProps) {
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
-      <svg width="44" height="44" viewBox="0 0 48 48" aria-hidden="true" className="shrink-0">
-        <path
-          d="M24 1l4.4 7.2 8-2.6 1.2 8.3 8.2 1.7-3.6 7.6 5.6 6.2-7.4 4 1.2 8.3-8.4-.4L24 47l-5.2-6.7-8.4.4 1.2-8.3-7.4-4 5.6-6.2-3.6-7.6 8.2-1.7 1.2-8.3 8-2.6z"
-          fill="#E63946"
-        />
-        <path d="M13 21c0-5 5-8.5 11-8.5S35 16 35 21z" fill="#FFB703" />
-        <rect x="12" y="23" width="24" height="3.2" rx="1.6" fill="#1d1d1d" />
-        <path d="M13 28h22l-2.2 2.4-2.4-2.4-2.4 2.4-2.4-2.4-2.4 2.4-2.4-2.4-2.4 2.4z" fill="#FFB703" />
-        <path d="M13 32.5h22c0 3-3 5-11 5s-11-2-11-5z" fill="#FB8500" />
-        <g fill="#fff" opacity=".85">
-          <circle cx="20" cy="17" r=".9" />
-          <circle cx="25" cy="15.5" r=".9" />
-          <circle cx="29.5" cy="17.5" r=".9" />
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+      <svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true" className="shrink-0">
+        {/* pain du dessus */}
+        <path d="M8 27C8 14 18 7 32 7s24 7 24 20z" fill="#FF8732" />
+        <g fill="#F5EBDC">
+          <ellipse cx="22" cy="17" rx="2" ry="1.2" transform="rotate(-25 22 17)" />
+          <ellipse cx="32" cy="13" rx="2" ry="1.2" />
+          <ellipse cx="42" cy="17" rx="2" ry="1.2" transform="rotate(25 42 17)" />
+          <ellipse cx="36" cy="21" rx="2" ry="1.2" transform="rotate(10 36 21)" />
         </g>
+        {/* steak + sauce qui coule */}
+        <rect x="6" y="29" width="52" height="8" rx="4" fill="#F5EBDC" />
+        <path
+          d="M6 38c6-4 10 2 16-1s9 3 16 0 8-3 14 0v3c0 3-3 3-3 6 0 3-4 3-4 0 0-2-2-3-3-2-2 2-1 6-4 6s-3-4-3-6c0-1-2-2-3-1-3 3-3 6-6 6s-3-5-3-6-3-2-4 0c-1 2-1 5-4 5s-3-4-3-6c0-1-4-2-5-1z"
+          fill="#FF8732"
+        />
+        {/* pain du dessous */}
+        <path d="M8 52h48c0 6-8 8-24 8S8 58 8 52z" fill="#FF8732" />
       </svg>
       <span className="leading-none">
-        <span className="font-bebas text-jaune text-2xl sm:text-3xl tracking-wider block leading-none">
-          Burger<span className="text-rouge">Boom</span>
+        <span className="font-bebas text-creme text-lg sm:text-xl block leading-none whitespace-nowrap -skew-x-6">
+          Burger <span className="text-jaune">Boom</span>
         </span>
         {tagline && (
-          <span className="hidden sm:block text-[10px] text-gray-400 font-oswald tracking-widest uppercase mt-1">
+          <span className="hidden lg:block text-[9px] text-creme/60 font-oswald !font-bold tracking-widest uppercase mt-1">
             Artisanal · Généreux · Savoureux
           </span>
         )}

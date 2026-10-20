@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { getImage } from '../lib/images'
 
@@ -30,6 +30,12 @@ export default function CommandePage() {
   const [commande, setCommande] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
+  // Raccourcis du hero : /commande?mode=livraison | a_emporter | sur_place
+  useEffect(() => {
+    const m = new URLSearchParams(window.location.search).get('mode')
+    if (m === 'livraison' || m === 'a_emporter' || m === 'sur_place') setMode(m)
+  }, [])
+
   const ajouter = (id: number) => setPanier((p) => ({ ...p, [id]: (p[id] || 0) + 1 }))
   const retirer = (id: number) =>
     setPanier((p) => {
@@ -56,15 +62,15 @@ export default function CommandePage() {
       <div className="min-h-[80vh] bg-sombre flex items-center justify-center">
         <div className="text-center max-w-md px-5 sm:px-6 py-16 sm:py-20">
           <div className="text-7xl sm:text-8xl mb-6 animate-bounce">🎉</div>
-          <h1 className="font-bebas text-jaune text-5xl sm:text-6xl mb-4">Boom !</h1>
-          <p className="text-white text-base sm:text-lg mb-2">Ta commande est en préparation !</p>
-          <p className="text-gray-400 text-sm mb-8">
+          <h1 className="font-bebas text-jaune text-3xl sm:text-4xl mb-4">Boom !</h1>
+          <p className="text-creme text-base sm:text-lg mb-2">Ta commande est en préparation !</p>
+          <p className="text-creme/70 text-sm mb-8">
             {mode === 'livraison' ? 'Livraison estimée : 30–45 min' : 'Prête dans : 15–20 min'}
           </p>
           <div className="bg-white/10 rounded-xl p-5 sm:p-6 text-left mb-8">
             {panierItems.map(({ item, qty }) => (
-              <div key={item.id} className="flex justify-between py-2 text-sm border-b border-white/10 last:border-0">
-                <span className="text-white">{item.emoji} {qty}× {item.nom}</span>
+              <div key={item.id} className="flex justify-between py-2 text-sm border-b border-creme/20 last:border-0">
+                <span className="text-creme">{item.emoji} {qty}× {item.nom}</span>
                 <span className="text-jaune font-bold whitespace-nowrap ml-2">{(item.prix * qty).toFixed(2)} €</span>
               </div>
             ))}
@@ -91,27 +97,16 @@ export default function CommandePage() {
     <div className="min-h-screen pb-28 lg:pb-0">
       {/* Hero */}
       <section className="relative bg-sombre py-10 sm:py-12 text-center overflow-hidden">
-        <div className="absolute inset-0 opacity-15">
-          <Image
-            src="/images/backdrop_restaurant_interior.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-sombre/80 to-sombre" />
-        </div>
         <div className="relative">
-          <h1 className="font-bebas text-jaune text-5xl sm:text-6xl lg:text-7xl">Commander</h1>
-          <p className="text-gray-300 mt-2 font-oswald uppercase tracking-wider text-xs sm:text-sm">
+          <h1 className="font-bebas text-jaune text-3xl sm:text-4xl lg:text-5xl">Commander</h1>
+          <p className="text-creme/70 mt-2 font-oswald uppercase tracking-wider text-xs sm:text-sm">
             Rapide · Délicieux · Généreux
           </p>
         </div>
       </section>
 
       {/* Mode picker */}
-      <div className="bg-gray-50 py-5 sm:py-6 border-b">
+      <div className="bg-creme/40 py-5 sm:py-6 border-b">
         <div className="max-w-5xl mx-auto px-5 sm:px-6 flex flex-col sm:flex-row gap-3 justify-center">
           {[
             { key: 'a_emporter', label: '🛍️ À emporter', desc: 'Prêt en 15 min' },
@@ -123,8 +118,8 @@ export default function CommandePage() {
               onClick={() => setMode(m.key as typeof mode)}
               className={`flex-1 sm:max-w-xs py-3 sm:py-4 px-5 sm:px-6 rounded-xl text-center transition-all border-2 ${
                 mode === m.key
-                  ? 'bg-rouge border-rouge text-white shadow-lg shadow-rouge/30'
-                  : 'bg-white border-gray-200 hover:border-rouge text-gray-600'
+                  ? 'bg-rouge border-rouge text-creme shadow-lg shadow-rouge/30'
+                  : 'bg-creme-50 border-sombre/15 hover:border-rouge text-sombre'
               }`}
             >
               <div className="font-oswald uppercase tracking-wider text-sm sm:text-base">{m.label}</div>
@@ -159,7 +154,7 @@ export default function CommandePage() {
                       <h3 className="font-oswald text-sombre uppercase text-sm sm:text-base leading-tight">
                         {item.nom}
                       </h3>
-                      <p className="font-bebas text-rouge text-xl sm:text-2xl leading-none mt-1">
+                      <p className="font-bebas text-rouge text-base sm:text-lg leading-none mt-1">
                         {item.prix.toFixed(2)} €
                       </p>
                     </div>
@@ -169,7 +164,7 @@ export default function CommandePage() {
                           <button
                             onClick={() => retirer(item.id)}
                             aria-label={`Retirer ${item.nom}`}
-                            className="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-600 hover:bg-rouge hover:text-white transition-colors text-lg"
+                            className="w-9 h-9 bg-creme rounded-full flex items-center justify-center font-bold text-sombre hover:bg-rouge hover:text-creme transition-colors text-lg"
                           >
                             −
                           </button>
@@ -177,7 +172,7 @@ export default function CommandePage() {
                           <button
                             onClick={() => ajouter(item.id)}
                             aria-label={`Ajouter ${item.nom}`}
-                            className="w-9 h-9 bg-rouge rounded-full flex items-center justify-center font-bold text-white hover:bg-rouge-dark transition-colors text-lg"
+                            className="w-9 h-9 bg-rouge rounded-full flex items-center justify-center font-bold text-creme hover:bg-rouge-dark transition-colors text-lg"
                           >
                             +
                           </button>
@@ -204,7 +199,7 @@ export default function CommandePage() {
             <h2 className="font-bebas text-jaune text-2xl sm:text-3xl mb-6 flex items-center gap-3">
               Mon Panier
               {itemCount > 0 && (
-                <span className="text-sm bg-rouge text-white font-oswald px-2 py-0.5 rounded">
+                <span className="text-sm bg-creme text-sombre font-oswald px-2 py-0.5 rounded">
                   {itemCount}
                 </span>
               )}
@@ -222,7 +217,7 @@ export default function CommandePage() {
 
       {/* Mobile sticky cart bar */}
       {itemCount > 0 && (
-        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-sombre border-t border-white/10 shadow-2xl">
+        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-sombre border-t border-creme/20 shadow-2xl">
           <button
             onClick={() => setDrawerOpen(true)}
             className="w-full p-4 flex items-center justify-between gap-4 text-left"
@@ -231,13 +226,13 @@ export default function CommandePage() {
             <div className="flex items-center gap-3">
               <div className="relative">
                 <span className="text-3xl">🛒</span>
-                <span className="absolute -top-1 -right-2 bg-rouge text-white text-[10px] font-bold rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center">
+                <span className="absolute -top-1 -right-2 bg-creme text-sombre text-[10px] font-bold rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center">
                   {itemCount}
                 </span>
               </div>
               <div>
                 <p className="font-oswald text-jaune text-sm uppercase tracking-wider">Mon panier</p>
-                <p className="text-white text-xs">{itemCount} article{itemCount > 1 ? 's' : ''}</p>
+                <p className="text-creme text-xs">{itemCount} article{itemCount > 1 ? 's' : ''}</p>
               </div>
             </div>
             <div className="bg-jaune text-sombre font-bebas text-xl px-5 py-2 rounded-md">
@@ -259,7 +254,7 @@ export default function CommandePage() {
               <h2 className="font-bebas text-jaune text-3xl">Mon Panier</h2>
               <button
                 onClick={() => setDrawerOpen(false)}
-                className="text-white p-2 -mr-2"
+                className="text-creme p-2 -mr-2"
                 aria-label="Fermer le panier"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -306,7 +301,7 @@ function PanierContent({
 }) {
   if (panierItems.length === 0) {
     return (
-      <div className="text-center py-10 text-gray-500">
+      <div className="text-center py-10 text-creme/70">
         <div className="text-5xl mb-3">🛒</div>
         <p className="text-sm font-oswald uppercase tracking-wider">Panier vide</p>
         <p className="text-xs mt-2">Ajoute des burgers à ta commande !</p>
@@ -318,14 +313,14 @@ function PanierContent({
       <div className="space-y-3 mb-6">
         {panierItems.map(({ item, qty }) => (
           <div key={item.id} className="flex justify-between text-sm gap-2">
-            <span className="text-gray-300 truncate">{item.emoji} {qty}× {item.nom}</span>
+            <span className="text-creme/70 truncate">{item.emoji} {qty}× {item.nom}</span>
             <span className="font-bold text-jaune whitespace-nowrap">
               {(item.prix * qty).toFixed(2)} €
             </span>
           </div>
         ))}
       </div>
-      <div className="space-y-2 mb-4 text-sm text-gray-400">
+      <div className="space-y-2 mb-4 text-sm text-creme/70">
         <div className="flex justify-between">
           <span>Sous-total</span>
           <span>{total.toFixed(2)} €</span>
@@ -337,7 +332,7 @@ function PanierContent({
           </div>
         )}
       </div>
-      <div className="border-t border-white/10 pt-4 mb-6 flex justify-between font-bebas text-jaune text-2xl">
+      <div className="border-t border-creme/20 pt-4 mb-6 flex justify-between font-bebas text-jaune text-2xl">
         <span>Total</span>
         <span>{totalFinal.toFixed(2)} €</span>
       </div>

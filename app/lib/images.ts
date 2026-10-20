@@ -4,7 +4,6 @@ const u = (id: string, w = 800) =>
 const local = (name: string) => `/images/${name}.jpg`
 
 export const heroBurger = local('burger_boomboom_classic')
-export const heroBackdrop = local('backdrop_restaurant_interior')
 
 export const burgerImages: Record<string, string> = {
   'Le BoomBoom Classic': local('burger_boomboom_classic'),
@@ -28,8 +27,7 @@ export const burgerImages: Record<string, string> = {
   'Milk-Shake Vanille': u('photo-1572490122747-3968b75cc699'),
   'Milk-Shake Chocolat': local('drink_milkshake_chocolat'),
   "Jus d'Orange Pressé": u('photo-1613478223719-2ab802602423'),
-  'Eau Minérale 50cl': u('photo-1559839734-2b71ea197ec2'),
-  'Bière Pression 25cl': u('photo-1608270586620-248524c67de9'),
+  'Eau Minérale 50cl': local('drink_eau_minerale'),
 
   'Sundae Chocolat': u('photo-1563805042-7684c019e1cb'),
   'Brownie Chaud': u('photo-1606313564200-e75d5e30476c'),

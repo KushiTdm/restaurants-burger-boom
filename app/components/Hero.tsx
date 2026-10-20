@@ -1,19 +1,17 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Image from 'next/image'
 import { gsap } from '../lib/gsap'
-import { heroBurger, heroBackdrop } from '../lib/images'
+import BurgerStack from './BurgerStack'
+import ScrollFloat from './ScrollFloat'
+import { BurgerLineIcon, FriesLineIcon, CupLineIcon } from './Icons'
 
 const SELECTORS = [
   '[data-hero=badge]',
-  '[data-hero=title] > span',
   '[data-hero=desc]',
   '[data-hero=cta] > *',
   '[data-hero=visual]',
   '[data-hero=stamp]',
-  '[data-hero=backdrop]',
-  '[data-hero=visual-img]',
 ] as const
 
 export default function Hero() {
@@ -45,11 +43,6 @@ export default function Hero() {
       timeline = gsap.timeline({ defaults: { ease: 'power3.out' } })
       timeline
         .from(q('[data-hero=badge]'), { y: 20, opacity: 0, duration: 0.6, ...ir })
-        .from(
-          q('[data-hero=title] > span'),
-          { y: 60, opacity: 0, duration: 0.8, stagger: 0.12, ...ir },
-          '-=0.2',
-        )
         .from(q('[data-hero=desc]'), { y: 30, opacity: 0, duration: 0.7, ...ir }, '-=0.4')
         .from(
           q('[data-hero=cta] > *'),
@@ -58,7 +51,7 @@ export default function Hero() {
         )
         .from(
           q('[data-hero=visual]'),
-          { x: 80, opacity: 0, duration: 1, ease: 'power4.out', ...ir },
+          { y: 70, scale: 0.9, opacity: 0, duration: 1, ease: 'power4.out', ...ir },
           '-=0.9',
         )
         .from(
@@ -68,20 +61,10 @@ export default function Hero() {
         )
 
       stTweens.push(
-        gsap.to(q('[data-hero=backdrop]'), {
-          yPercent: 25,
-          ease: 'none',
-          scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: true },
-        }),
         gsap.to(q('[data-hero=visual]'), {
           yPercent: -15,
           ease: 'none',
           scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: true },
-        }),
-        gsap.to(q('[data-hero=visual-img]'), {
-          rotation: 8,
-          ease: 'none',
-          scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 1 },
         }),
       )
     }, 80)
@@ -102,98 +85,78 @@ export default function Hero() {
   return (
     <section
       ref={root}
-      className="relative min-h-[100svh] bg-sombre flex items-center overflow-hidden"
+      className="relative min-h-[calc(100svh-56px)] md:min-h-[calc(100svh-72px)] bg-sombre flex items-center overflow-hidden"
     >
-      <div data-hero="backdrop" className="absolute inset-0 z-0">
-        <Image
-          src={heroBackdrop}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-sombre/80 via-sombre/70 to-sombre" />
+      {/* Motif typographique : lignes de "BURGER" répétées, qui défilent doucement en sens alternés */}
+      <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden flex flex-col justify-center select-none pointer-events-none">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <div
+            key={i}
+            className={`flex w-max whitespace-nowrap font-bebas text-creme/[0.2] leading-[0.95] text-[clamp(2rem,5.2vw,4.75rem)] ${
+              i % 2 ? 'animate-marquee-right' : 'animate-marquee-left'
+            }`}
+          >
+            {Array.from({ length: 2 }).map((__, k) => (
+              <span key={k} className="pr-[0.4em]">
+                {'BURGER '.repeat(14)}
+              </span>
+            ))}
+          </div>
+        ))}
       </div>
 
-      <div
-        className="absolute inset-0 opacity-[0.04] z-0"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(0deg, #FFB703 0, #FFB703 2px, transparent 0, transparent 40px)',
-        }}
-      />
+      {/* Pictos décoratifs sur les bords */}
+      <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none text-creme/25 hidden sm:block">
+        <BurgerLineIcon className="absolute left-[3%] top-[14%] w-14 h-14 -rotate-12 animate-float-slow" />
+        <FriesLineIcon className="absolute left-[46%] top-[8%] w-12 h-12 rotate-12 animate-float-slow" />
+        <CupLineIcon className="absolute right-[3%] top-[12%] w-14 h-14 rotate-12 animate-float-slow" />
+        <FriesLineIcon className="absolute left-[4%] bottom-[10%] w-14 h-14 rotate-6 animate-float-slow" />
+        <BurgerLineIcon className="absolute right-[4%] bottom-[8%] w-14 h-14 rotate-12 animate-float-slow" />
+      </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-6 py-16 sm:py-20 md:py-24 grid md:grid-cols-2 gap-10 md:gap-12 items-center">
-        <div data-hero="content">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-6 py-8 md:py-6 grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-4 items-center">
+        <div className="text-center md:text-left">
           <span
             data-hero="badge"
-            className="inline-block bg-rouge text-white text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-2 rounded uppercase tracking-wider mb-5 sm:mb-6"
+            className="inline-block bg-creme text-sombre text-[11px] font-black px-3 py-1.5 rounded uppercase tracking-wider mb-4"
           >
-            🍔 Ouvert 7j/7 · Livraison disponible
+            Ouvert 7j/7 · Paris & Lyon
           </span>
+
+          {/* Titre typographique : très gros texte crème sur fond rouge, animé lettre par lettre */}
           <h1
             data-hero="title"
-            className="font-bebas text-white text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.95] mb-4"
+            className="font-bebas text-creme uppercase leading-[0.92] text-[clamp(2.4rem,7vw,4.5rem)] md:text-[clamp(2.4rem,5.6vw,4.5rem)] mb-5"
           >
-            <span className="block">Le Meilleur</span>
-            <span className="block text-jaune">Burger</span>
-            <span className="block">de la Ville</span>
+            <ScrollFloat as="span" playOnLoad effect="wave" animationDuration={1.1} delay={0.2} stagger={0.035} distance={100} stretch={1.8} ease="power3.inOut" containerClassName="block">
+              Le meilleur
+            </ScrollFloat>
+            <ScrollFloat as="span" playOnLoad effect="wave" animationDuration={1.1} delay={0.45} stagger={0.035} distance={100} stretch={1.8} ease="power3.inOut" containerClassName="block">
+              Burger
+            </ScrollFloat>
+            <ScrollFloat as="span" playOnLoad effect="wave" animationDuration={1.1} delay={0.7} stagger={0.035} distance={100} stretch={1.8} ease="power3.inOut" containerClassName="block" textClassName="text-jaune">
+              de la ville
+            </ScrollFloat>
           </h1>
-          <p
-            data-hero="desc"
-            className="text-gray-300 text-base sm:text-lg mb-7 sm:mb-8 max-w-md"
-          >
-            Des burgers artisanaux préparés avec des ingrédients frais, des pains briochés maison et une générosité qui vous reviendra chaque semaine.
+
+          <p data-hero="desc" className="text-creme text-base mb-6 max-w-sm mx-auto md:mx-0">
+            Burgers artisanaux, ingrédients frais, pains briochés maison.
           </p>
-          <div data-hero="cta" className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <a href="/commande" className="btn-jaune text-center">Commander maintenant</a>
+          <div data-hero="cta" className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start items-center">
+            <a href="/commande?mode=livraison" className="btn-jaune text-center">Livraison</a>
+            <a href="/commande?mode=a_emporter" className="btn-jaune text-center">À emporter</a>
             <a
               href="/menu"
-              className="inline-block border-2 border-white/30 text-white font-oswald px-6 sm:px-8 py-3 sm:py-4 uppercase tracking-wider text-center hover:border-jaune hover:text-jaune transition-colors"
+              className="font-oswald text-creme text-sm uppercase tracking-wider underline underline-offset-4 decoration-2 hover:text-jaune transition-colors px-2 py-3"
             >
-              Voir le menu
+              Voir le menu →
             </a>
           </div>
         </div>
 
-        <div className="flex items-center justify-center" data-hero="visual">
-          <div className="relative w-[260px] h-[260px] xs:w-[300px] xs:h-[300px] sm:w-[360px] sm:h-[360px] md:w-[420px] md:h-[420px]">
-            <div className="absolute inset-0 bg-jaune/30 rounded-full blur-3xl" />
-            <div
-              data-hero="visual-img"
-              className="relative w-full h-full rounded-full overflow-hidden shadow-2xl ring-4 ring-jaune/40"
-            >
-              <Image
-                src={heroBurger}
-                alt="Burger artisanal BurgerBoom"
-                fill
-                priority
-                sizes="(max-width: 768px) 300px, 420px"
-                className="object-cover"
-              />
-            </div>
-            <div
-              data-hero="stamp"
-              className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 bg-rouge text-white font-bebas text-lg sm:text-2xl px-3 sm:px-4 py-1.5 sm:py-2 rounded rotate-12 shadow-lg"
-            >
-              ARTISANAL
-            </div>
-            <div
-              data-hero="stamp"
-              className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 bg-jaune text-sombre font-bebas text-base sm:text-xl px-3 sm:px-4 py-1.5 sm:py-2 rounded -rotate-6 shadow-lg"
-            >
-              GÉNÉREUX
-            </div>
-          </div>
+        <div className="flex items-center justify-center md:justify-end md:pr-2 lg:pr-8" data-hero="visual">
+          <BurgerStack />
         </div>
-      </div>
-
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2 animate-bounce">
-        <span className="text-gray-400 text-[10px] font-oswald uppercase tracking-widest">Scroll</span>
-        <svg className="w-5 h-5 text-jaune" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
       </div>
     </section>
   )

@@ -28,7 +28,6 @@ const menuData = {
     { nom: 'Milk-Shake Chocolat', prix: '5 €', desc: 'Glace chocolat, lait entier, copeaux de chocolat noir' },
     { nom: "Jus d'Orange Pressé", prix: '4 €', desc: 'Oranges fraîches pressées à la commande' },
     { nom: 'Eau Minérale 50cl', prix: '2 €', desc: '' },
-    { nom: 'Bière Pression 25cl', prix: '4 €', desc: 'Heineken ou Kronenbourg 1664' },
   ],
   desserts: [
     { nom: 'Sundae Chocolat', prix: '5 €', desc: 'Glace vanille, sauce chocolat chaude, chantilly, granola croustillant' },
@@ -50,34 +49,23 @@ export default function MenuPage() {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative bg-sombre py-14 sm:py-16 lg:py-20 text-center overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <Image
-            src="/images/backdrop_restaurant_interior.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-sombre/80 via-sombre/70 to-sombre" />
-        </div>
         <div className="relative max-w-5xl mx-auto px-5 sm:px-6">
           <p className="font-oswald text-jaune tracking-[0.3em] uppercase text-xs mb-3">— La Carte —</p>
-          <h1 className="font-bebas text-jaune text-6xl sm:text-7xl lg:text-9xl leading-none">Notre Menu</h1>
-          <p className="text-gray-300 mt-4 font-oswald tracking-wider uppercase text-xs sm:text-sm">
+          <h1 className="font-bebas text-jaune text-4xl sm:text-5xl lg:text-7xl leading-none">Notre Menu</h1>
+          <p className="text-creme/70 mt-4 font-oswald tracking-wider uppercase text-xs sm:text-sm">
             Fait maison · Ingrédients frais · Généreux
           </p>
         </div>
       </section>
 
       {/* Sticky nav */}
-      <nav className="sticky top-[60px] md:top-[76px] z-30 bg-white/95 backdrop-blur-md border-b shadow-sm">
+      <nav className="sticky top-14 md:top-[72px] z-30 bg-creme-50/95 backdrop-blur-md border-b shadow-sm">
         <div className="max-w-5xl mx-auto flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar px-5 sm:px-6 py-3 sm:py-4">
           {sections.map((s) => (
             <a
               key={s.key}
               href={`#${s.key}`}
-              className="font-oswald uppercase tracking-wider text-xs sm:text-sm text-gray-500 hover:text-rouge whitespace-nowrap transition-colors flex-shrink-0"
+              className="font-oswald uppercase tracking-wider text-xs sm:text-sm text-sombre hover:text-rouge whitespace-nowrap transition-colors flex-shrink-0"
             >
               {s.label}
             </a>
@@ -89,8 +77,8 @@ export default function MenuPage() {
         {/* Burgers */}
         <section id="burgers" className="mb-16 sm:mb-20 scroll-mt-32">
           <Reveal>
-            <h2 className="font-bebas text-sombre text-5xl sm:text-6xl mb-2">🍔 Burgers</h2>
-            <p className="text-gray-500 text-sm mb-6 sm:mb-8">
+            <h2 className="font-bebas text-sombre text-3xl sm:text-4xl mb-2">🍔 Burgers</h2>
+            <p className="text-sombre text-sm mb-6 sm:mb-8">
               Pain brioche fait maison · Viande 100% bœuf charolais · Légumes frais
             </p>
           </Reveal>
@@ -108,7 +96,7 @@ export default function MenuPage() {
                     sizes="120px"
                     className="object-cover"
                   />
-                  <span className="absolute top-1 left-1 bg-white/90 text-base w-7 h-7 flex items-center justify-center rounded-full">
+                  <span className="absolute top-1 left-1 bg-creme-50/90 text-base w-7 h-7 flex items-center justify-center rounded-full">
                     {item.badge}
                   </span>
                 </div>
@@ -117,11 +105,11 @@ export default function MenuPage() {
                     <h3 className="font-oswald text-sombre text-sm sm:text-base uppercase leading-tight">
                       {item.nom}
                     </h3>
-                    <span className="font-bebas text-rouge text-xl sm:text-2xl leading-none flex-shrink-0">
+                    <span className="font-bebas text-rouge text-base sm:text-lg leading-none flex-shrink-0">
                       {item.prix}
                     </span>
                   </div>
-                  <p className="text-gray-500 text-xs leading-relaxed line-clamp-3">{item.desc}</p>
+                  <p className="text-sombre text-xs leading-relaxed line-clamp-3">{item.desc}</p>
                 </div>
               </article>
             ))}
@@ -131,13 +119,13 @@ export default function MenuPage() {
         {/* Sides */}
         <section id="sides" className="mb-16 sm:mb-20 scroll-mt-32">
           <Reveal>
-            <h2 className="font-bebas text-sombre text-5xl sm:text-6xl mb-6 sm:mb-8">🍟 Accompagnements</h2>
+            <h2 className="font-bebas text-sombre text-3xl sm:text-4xl mb-6 sm:mb-8">🍟 Accompagnements</h2>
           </Reveal>
           <Reveal stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {menuData.sides.map((item) => (
               <article
                 key={item.nom}
-                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl border border-gray-100 transition-all hover:-translate-y-1 duration-300"
+                className="bg-creme-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl border border-sombre/15 transition-all hover:-translate-y-1 duration-300"
               >
                 <div className="relative h-32 sm:h-36">
                   <Image
@@ -153,11 +141,11 @@ export default function MenuPage() {
                     <h3 className="font-oswald text-sombre uppercase text-sm sm:text-base leading-tight">
                       {item.nom}
                     </h3>
-                    <span className="font-bebas text-jaune-dark text-xl sm:text-2xl leading-none flex-shrink-0">
+                    <span className="font-bebas text-rouge text-base sm:text-lg leading-none flex-shrink-0">
                       {item.prix}
                     </span>
                   </div>
-                  <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
+                  <p className="text-sombre text-xs leading-relaxed">{item.desc}</p>
                 </div>
               </article>
             ))}
@@ -167,13 +155,13 @@ export default function MenuPage() {
         {/* Boissons */}
         <section id="boissons" className="mb-16 sm:mb-20 scroll-mt-32">
           <Reveal>
-            <h2 className="font-bebas text-sombre text-5xl sm:text-6xl mb-6 sm:mb-8">🥤 Boissons</h2>
+            <h2 className="font-bebas text-sombre text-3xl sm:text-4xl mb-6 sm:mb-8">🥤 Boissons</h2>
           </Reveal>
           <Reveal stagger className="grid sm:grid-cols-2 gap-3 sm:gap-4">
             {menuData.boissons.map((item) => (
               <article
                 key={item.nom}
-                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl hover:bg-creme/40 transition-colors"
               >
                 <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg overflow-hidden">
                   <Image
@@ -189,12 +177,12 @@ export default function MenuPage() {
                     <span className="font-oswald text-sombre uppercase text-sm sm:text-base">
                       {item.nom}
                     </span>
-                    <span className="font-bebas text-rouge text-xl sm:text-2xl leading-none flex-shrink-0">
+                    <span className="font-bebas text-rouge text-base sm:text-lg leading-none flex-shrink-0">
                       {item.prix}
                     </span>
                   </div>
                   {item.desc && (
-                    <p className="text-gray-400 text-xs mt-0.5 line-clamp-2">{item.desc}</p>
+                    <p className="text-sombre/80 text-xs mt-0.5 line-clamp-2">{item.desc}</p>
                   )}
                 </div>
               </article>
@@ -205,7 +193,7 @@ export default function MenuPage() {
         {/* Desserts */}
         <section id="desserts" className="mb-12 sm:mb-16 scroll-mt-32">
           <Reveal>
-            <h2 className="font-bebas text-sombre text-5xl sm:text-6xl mb-6 sm:mb-8">🍨 Desserts</h2>
+            <h2 className="font-bebas text-sombre text-3xl sm:text-4xl mb-6 sm:mb-8">🍨 Desserts</h2>
           </Reveal>
           <Reveal stagger className="grid sm:grid-cols-2 gap-4 sm:gap-5">
             {menuData.desserts.map((item) => (
@@ -224,11 +212,11 @@ export default function MenuPage() {
                     <h3 className="font-oswald text-sombre uppercase text-base sm:text-lg leading-tight">
                       {item.nom}
                     </h3>
-                    <span className="font-bebas text-rouge text-xl sm:text-2xl leading-none flex-shrink-0">
+                    <span className="font-bebas text-rouge text-base sm:text-lg leading-none flex-shrink-0">
                       {item.prix}
                     </span>
                   </div>
-                  <p className="text-gray-500 text-sm">{item.desc}</p>
+                  <p className="text-sombre text-sm">{item.desc}</p>
                 </div>
               </article>
             ))}
@@ -237,18 +225,9 @@ export default function MenuPage() {
 
         {/* CTA */}
         <Reveal className="relative overflow-hidden bg-gradient-to-br from-sombre to-rouge-dark rounded-2xl p-8 sm:p-12 text-center">
-          <div className="absolute inset-0 opacity-10">
-            <Image
-              src="/images/backdrop_restaurant_interior.jpg"
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
           <div className="relative">
-            <h2 className="font-bebas text-jaune text-4xl sm:text-5xl mb-3">Prêt à Commander ?</h2>
-            <p className="text-gray-300 mb-6 text-sm sm:text-base">
+            <h2 className="font-bebas text-jaune text-2xl sm:text-3xl mb-3">Prêt à Commander ?</h2>
+            <p className="text-creme/70 mb-6 text-sm sm:text-base">
               Commandez en ligne, récupérez en 15 min ou faites-vous livrer !
             </p>
             <a href="/commande" className="btn-jaune inline-block">

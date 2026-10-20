@@ -13,7 +13,7 @@ type Props = {
 export default function BurgerCard({ nom, description, prix, badge, image }: Props) {
   return (
     <article className="burger-card group flex flex-col h-full">
-      <div className="relative h-48 sm:h-52 overflow-hidden">
+      <div className="relative aspect-square overflow-hidden">
         <Image
           src={image}
           alt={nom}
@@ -22,7 +22,7 @@ export default function BurgerCard({ nom, description, prix, badge, image }: Pro
           className="object-cover group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-        <span className="absolute top-3 left-3 inline-block bg-white/95 text-sombre text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full shadow">
+        <span className="absolute top-3 left-3 inline-block bg-creme-50/95 text-sombre text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full shadow">
           {badge}
         </span>
       </div>
@@ -30,7 +30,7 @@ export default function BurgerCard({ nom, description, prix, badge, image }: Pro
         <h3 className="font-oswald font-bold text-sombre text-lg sm:text-xl uppercase mb-2 leading-tight">
           {nom}
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed mb-5 flex-1">{description}</p>
+        <p className="text-sombre text-sm leading-relaxed mb-5 flex-1">{description}</p>
         <div className="flex items-center justify-between">
           <span className="font-bebas text-rouge text-3xl leading-none">{prix}</span>
           <a href="/commande" className="btn-rouge !text-sm !px-5 !py-2.5">

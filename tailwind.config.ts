@@ -17,23 +17,35 @@ const config: Config = {
     },
     extend: {
       colors: {
-        rouge: '#E63946',
-        'rouge-dark': '#C1121F',
-        jaune: '#FFB703',
-        'jaune-dark': '#FB8500',
-        sombre: '#1d1d1d',
+        rouge: '#D62300',
+        'rouge-dark': '#B01D00',
+        jaune: '#FF8732',
+        'jaune-dark': '#E56F1A',
+        sombre: '#D62300',
+        creme: '#F5EBDC',
+        'creme-50': '#FAF3E9',
       },
       fontFamily: {
-        oswald: ['Oswald', 'sans-serif'],
-        bebas: ['Bebas Neue', 'cursive'],
+        oswald: ['Archivo', 'sans-serif'],
+        bebas: ['Archivo', 'sans-serif'],
       },
       keyframes: {
+        'marquee-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'marquee-right': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
         'float-slow': {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-12px)' },
         },
       },
       animation: {
+        'marquee-left': 'marquee-left 60s linear infinite',
+        'marquee-right': 'marquee-right 60s linear infinite',
         'float-slow': 'float-slow 4s ease-in-out infinite',
       },
     },

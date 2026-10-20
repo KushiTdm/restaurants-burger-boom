@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Logo from './Logo'
+import { PinIcon, PhoneIcon } from './Icons'
 
 const links = [
   { href: '/', label: 'Accueil' },
@@ -35,12 +36,12 @@ export default function Header() {
     <>
       <header
         className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-sombre/95 shadow-xl' : 'bg-sombre shadow-lg'
+          scrolled ? 'bg-sombre shadow-xl' : 'bg-sombre shadow-lg'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 md:h-[72px] flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 group">
-            <span className="group-hover:scale-105 transition-transform duration-300"><Logo tagline /></span>
+            <span className="group-hover:scale-105 transition-transform duration-300"><Logo /></span>
           </a>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -48,14 +49,14 @@ export default function Header() {
               <a
                 key={l.href}
                 href={l.href}
-                className={`font-oswald transition-colors tracking-wider uppercase text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:bg-jaune after:transition-all ${
-                  pathname === l.href ? 'text-jaune after:w-full' : 'text-white hover:text-jaune after:w-0 hover:after:w-full'
+                className={`font-oswald transition-colors tracking-wider uppercase text-[13px] relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:bg-jaune after:transition-all ${
+                  pathname === l.href ? 'text-jaune after:w-full' : 'text-creme hover:text-jaune after:w-0 hover:after:w-full'
                 }`}
               >
                 {l.label}
               </a>
             ))}
-            <a href="/commande" className="btn-jaune text-sm !py-3 !px-6">Commander</a>
+            <a href="/commande" className="btn-jaune !text-xs !py-2.5 !px-5">Commander</a>
           </nav>
 
           <button
@@ -77,7 +78,7 @@ export default function Header() {
 
       {/* Drawer mobile — rendered outside header so fixed-positioning targets the viewport */}
       <div
-        className={`md:hidden fixed inset-0 top-[60px] z-40 bg-sombre transition-transform duration-300 ${
+        className={`md:hidden fixed inset-0 top-14 z-40 bg-sombre transition-transform duration-300 ${
           open ? 'translate-x-0' : 'translate-x-full pointer-events-none'
         }`}
         aria-hidden={!open}
@@ -87,18 +88,18 @@ export default function Header() {
             <a
               key={l.href}
               href={l.href}
-              className={`font-bebas text-4xl py-4 border-b border-white/10 ${
-                pathname === l.href ? 'text-jaune' : 'text-white'
+              className={`font-bebas text-3xl py-4 border-b border-creme/20 ${
+                pathname === l.href ? 'text-jaune' : 'text-creme'
               }`}
             >
               {l.label}
             </a>
           ))}
           <a href="/commande" className="btn-jaune mt-6 text-center text-lg">Commander maintenant</a>
-          <div className="mt-8 text-gray-400 text-sm space-y-2">
-            <p>📞 <a href="tel:+33142000000" className="hover:text-jaune">+33 1 42 XX XX XX</a></p>
-            <p>📍 12 Rue de Rivoli, Paris</p>
-            <p>📍 45 Cours Lafayette, Lyon</p>
+          <div className="mt-8 text-creme/70 text-sm space-y-2">
+            <p className="flex items-center gap-2"><PhoneIcon className="w-4 h-4" /> <a href="tel:+33142000000" className="hover:text-jaune">+33 1 42 XX XX XX</a></p>
+            <p className="flex items-center gap-2"><PinIcon className="w-4 h-4" /> 12 Rue de Rivoli, Paris</p>
+            <p className="flex items-center gap-2"><PinIcon className="w-4 h-4" /> 45 Cours Lafayette, Lyon</p>
           </div>
         </nav>
       </div>
