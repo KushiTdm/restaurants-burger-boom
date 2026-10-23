@@ -1,3 +1,5 @@
+import cutoutBases from './cutouts.json'
+
 const u = (id: string, w = 800) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`
 
@@ -33,6 +35,15 @@ export const burgerImages: Record<string, string> = {
   'Brownie Chaud': u('photo-1606313564200-e75d5e30476c'),
   'Cheesecake New-Yorkais': u('photo-1533134242443-d4fd215305ad'),
   'Cookie Géant': u('photo-1499636136210-6f4ee915583e'),
+}
+
+// Calques détourés (burger seul, même cadrage que la photo) pour l'effet "sort de l'image".
+// Générés puis découpés par scripts/cut-burger-layers.py (sources PNG dans design/burger-cutouts),
+// qui écrit aussi la base de chaque burger dans cutouts.json.
+export const getCutout = (name: string): { cutout: string; base: number } | undefined => {
+  const file = burgerImages[name]?.match(/\/images\/(burger_[a-z_]+)\.jpg$/)?.[1]
+  const base = file ? (cutoutBases as Record<string, number>)[file] : undefined
+  return file && base ? { cutout: `/images/cutouts/${file}.webp`, base } : undefined
 }
 
 export const getImage = (name: string, fallback?: string) =>

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Reveal from '../components/Reveal'
-import { getImage } from '../lib/images'
+import { getImage, getCutout } from '../lib/images'
+import PopOutImage from '../components/PopOutImage'
 
 const menuData = {
   burgers: [
@@ -86,20 +87,20 @@ export default function MenuPage() {
             {menuData.burgers.map((item) => (
               <article
                 key={item.nom}
-                className="burger-card flex gap-4 p-3 sm:p-4 items-center"
+                className="burger-card group relative !overflow-visible hover:z-10 flex gap-4 p-3 sm:p-4 items-center"
               >
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 rounded-xl overflow-hidden">
-                  <Image
-                    src={getImage(item.nom)}
-                    alt={item.nom}
-                    fill
-                    sizes="120px"
-                    className="object-cover"
-                  />
-                  <span className="absolute top-1 left-1 bg-creme-50/90 text-base w-7 h-7 flex items-center justify-center rounded-full">
-                    {item.badge}
-                  </span>
-                </div>
+                <PopOutImage
+                  src={getImage(item.nom)}
+                  {...getCutout(item.nom)}
+                  alt={item.nom}
+                  sizes="120px"
+                  className="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 rounded-xl"
+                  badge={
+                    <span className="-mt-2 -ml-2 bg-creme-50/90 text-base w-7 h-7 flex items-center justify-center rounded-full">
+                      {item.badge}
+                    </span>
+                  }
+                />
                 <div className="flex-1 min-w-0">
                   <div className="flex justify-between items-start gap-2 mb-1">
                     <h3 className="font-oswald text-sombre text-sm sm:text-base uppercase leading-tight">

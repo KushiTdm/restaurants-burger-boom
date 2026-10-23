@@ -3,7 +3,7 @@ import Hero from './components/Hero'
 import BurgerCard from './components/BurgerCard'
 import Reveal from './components/Reveal'
 import { SunIcon, PercentTagIcon, FamilyIcon, AppleIcon, GooglePlayIcon, PinIcon, PhoneIcon } from './components/Icons'
-import { getImage } from './lib/images'
+import { getImage, getCutout } from './lib/images'
 
 const burgersBestsellers = [
   {
@@ -73,7 +73,7 @@ export default function HomePage() {
         </Reveal>
         <Reveal stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {burgersBestsellers.map((b) => (
-            <BurgerCard key={b.nom} {...b} image={getImage(b.nom)} />
+            <BurgerCard key={b.nom} {...b} image={getImage(b.nom)} {...getCutout(b.nom)} />
           ))}
         </Reveal>
         <Reveal className="text-center mt-10 sm:mt-12">
